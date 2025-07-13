@@ -1,4 +1,4 @@
-package lk.chopsticks.app.ejb.remote;
+package lk.chopsticks.app.core.service;
 
 import jakarta.ejb.Remote;
 import lk.chopsticks.app.core.model.User;

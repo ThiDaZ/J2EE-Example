@@ -1,10 +1,15 @@
-package lk.chopsticks.app.ejb.model;
+package lk.chopsticks.app.core.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "users")
-public class User {
+@NamedQueries({
+        @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
+})
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,6 +20,16 @@ public class User {
     private String email;
     private String password;
     private UserType type = UserType.USER;
+
+    public User() {
+    }
+
+    public User(String name, String email, String password, String contact) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.contact = contact;
+    }
 
     public Long getId() {
         return id;

@@ -10,11 +10,60 @@
     </parent>
 
     <artifactId>ear</artifactId>
+    <packaging>ear</packaging>
+    <name>J2EE-Example-EAR</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>lk.thidas.ee</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>lk.thidas.ee</groupId>
+            <artifactId>ejb</artifactId>
+            <version>1.0</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>lk.thidas.ee</groupId>
+            <artifactId>web</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <ejbModule>
+                            <groupId>lk.thidas.ee</groupId>
+                            <artifactId>ejb</artifactId>
+                            <bundleFinalName>ejb-module.jar</bundleFinalName>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>lk.thidas.ee</groupId>
+                            <artifactId>web</artifactId>
+                            <contextRoot>/j2ee-example</contextRoot>
+                            <bundleFinalName>web-module.war</bundleFinalName>
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
